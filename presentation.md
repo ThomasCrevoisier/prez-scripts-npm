@@ -1,4 +1,4 @@
-title: Les scripts NPM --yolo
+title: Les scripts NPM ...--yolo
 class: animation-fade
 layout: true
 
@@ -77,14 +77,13 @@ TL;DR : installation d'une dépendance npm
 
 ---
 
-## Démo 1 - Voler l'ownership de modules npm
+## Démo 1 - Modifier curl
 
 TL;DR : Notre module malicieux va executer un script après son installation qui va :
 
-- faire un `npm whoami` pour récupérer l'utilisateur courant
-- scraper la page `http://npmjs.com/~<MY_USER>` pour récupérer la liste des modules accessibles
-- pour tous les modules trouvés, executer `npm owner add <ME>`
-- si vous êtes méchants : `npm owner rm <MY_USER>`
+- créer un alias `curl` vers notre script
+- do whatever you want
+- appeler vraiment `curl`
 
 ---
 
@@ -95,6 +94,20 @@ Notre script de `postinstall` va :
 - exécuter un client socket
 - pour des messages spécifiques, le client executera la commande envoyée
 - c'est tout :)
+
+---
+
+## Démo 3 - Self-replicating script
+
+- `npm whoami`
+- scraping de la page de l'utilisateur sur le site de npm
+- pour tous les modules :
+  - `npm install`
+  - `cd my-module/`
+  - `npm version patch`
+  - ajouter le script dans `package.json`
+  - copier le script malicieux
+  - `npm publish`
 
 ---
 
