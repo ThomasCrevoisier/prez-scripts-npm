@@ -1,4 +1,4 @@
-title: Les scripts NPM ...--yolo
+title: Les scripts NPM et la sécurité
 class: animation-fade
 layout: true
 
@@ -10,6 +10,14 @@ layout: true
 class: impact
 
 # {{title}}
+
+---
+
+class: center
+
+# DISCLAIMER
+
+/!\ Je ne suis pas un expert en sécurité /!\
 
 ---
 
@@ -62,7 +70,7 @@ npm run say-hello
 
 ## "[pre|post]install"
 
-TL;DR : installation d'une dépendance npm
+### Installation d'une dépendance npm :
 
 - npm télécharge la dernière version de yolo
 - execute le script `preinstall` si il y en a un
@@ -71,33 +79,44 @@ TL;DR : installation d'une dépendance npm
 
 ---
 
-## Time to break things
+class: center
+
+## What could go wrong
 
 <img src="https://media.giphy.com/media/rVbAzUUSUC6dO/giphy.gif" />
 
 ---
 
-## Démo 1 - Modifier curl
-
-TL;DR : Notre module malicieux va executer un script après son installation qui va :
+## Idée 1 - Modifier curl
 
 - créer un alias `curl` vers notre script
-- do whatever you want
+
+```json
+{
+	"bin": {
+		"curl": "./my-custom-curl.js"
+	}
+}
+```
+
+- faire tout ce qu'on veut
+
 - appeler vraiment `curl`
+
 
 ---
 
-## Démo 2 - Remote terminal via socket
+## Idée 2 - Remote terminal via socket
 
-Notre script de `postinstall` va :
+Le script de `postinstall` va :
 
-- exécuter un client socket
-- pour des messages spécifiques, le client executera la commande envoyée
+- exécuter un client socket vers un serveur qu'on contrôle
+- pour des messages spécifiques, le client executera la commande envoyée et remontera les résultats
 - c'est tout :)
 
 ---
 
-## Démo 3 - Self-replicating script
+## Idée 3 - Self-replicating script
 
 - `npm whoami`
 - scraping de la page de l'utilisateur sur le site de npm
@@ -108,8 +127,11 @@ Notre script de `postinstall` va :
   - ajouter le script dans `package.json`
   - copier le script malicieux
   - `npm publish`
+- supprimer toutes traces du script malicieux
 
 ---
+
+class: center
 
 ## Give me solutions
 
@@ -117,20 +139,81 @@ Notre script de `postinstall` va :
 
 ---
 
-## Give me solutions
+## Précaution 1
 
-- `npm install --ignore-scripts <l'internet>`
-- `npm config set ignore-scripts true`
+Désactiver l'exécution automatique des scripts :
+
+`npm install --ignore-scripts <l'internet>`
+
+ou `npm config set ignore-scripts true`
+
+Inconvénient :
+- on casse le bon fonctionnement de certains packages (PhantomJS ou autre).
+
+---
+
+## Précaution 2
+
+NE PAS FAIRE D'INSTALLATION EN ROOT, aka `sudo npm install ...`.
+
+Pourquoi ?
+
+Les scripts sont exécutés avec les permissions de l'utilisateur courant.
+
+---
+
+## Précaution 3
+
+Auditer TOUTES les dépendances du projet à la main (il suffit qu'un seul module soit impacté).
+
+Inconvénient :
+- nombre de dépendances transitives conséquent
+
+Auditer toutes les dépendances du projet automatiquement ?
+- JavaScript est très permissif
+- analyse de code difficile
+- beaucoup de faux négatifs
+
+---
+
+## Précaution 4
+
+Depuis la version 6 :
+
+`npm audit`
+
+Inconvénient :
+- potentiel délai avant qu'une faille soit déclarée
+
+---
+
+## Précaution 5
+
+Dans le doute : `npm logout`
+
+---
+
 - signature des modules ?
   - https://github.com/npm/npm/issues/8489
   - https://github.com/node-forward/discussions/issues/29
-- DONT EXECUTE ARBITRARY CODE BY DEFAULT ANYONE ?
-
-Just saying : 
-- une typo arrive vite
-- https://www.kb.cert.org/CERT_WEB/services/vul-notes.nsf/6eacfaeab94596f5852569290066a50b/018dbb99def6980185257f820013f175/$FILE/npmwormdisclosure.pdf
 
 ---
+
+## Conclusion
+
+- une typo arrive vite (`npm install bable`)
+
+- Le problème n'est pas récent (2016) :
+
+https://www.kb.cert.org/CERT_WEB/services/vul-notes.nsf/6eacfaeab94596f5852569290066a50b/018dbb99def6980185257f820013f175/$FILE/npmwormdisclosure.pdf
+
+- Le problème n'est pas trivial à résoudre
+
+- Les exploits sont assez fun à écrire :)
+
+---
+
+class: center
 
 ## Questions
 
