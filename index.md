@@ -34,7 +34,10 @@ Dans tous les projets node :
   "name": "my-project",
   "version": "1.0.0",
   "dependencies": {
-    // vous dépendez de l'internet
+	"yolo": "^1.2.3",
+	"add": "~3.2.4",
+
+    // le reste de l'internet
   }
 }
 ```
@@ -74,6 +77,8 @@ npm run say-hello
 
 ### Installation d'une dépendance npm `yolo` :
 
+- `npm install yolo`
+
 - npm télécharge la dernière version de `yolo`
 
 - execute le script `preinstall` si il y en a un
@@ -108,6 +113,21 @@ class: center
 
 - appeler vraiment `curl`
 
+---
+
+## Idée 1 (bis)
+
+```json
+{
+	"name": "erase-npm",
+	"bin": {
+		"npm": "./not-so-nice-npm.js"
+	}
+}
+```
+
+--
+<img src="https://media.giphy.com/media/Ll2fajzk9DgaY/giphy.gif" />
 
 ---
 
@@ -135,6 +155,10 @@ Le script de `postinstall` va :
   - copier le script malicieux
   - `npm publish`
 - supprimer toutes traces du script malicieux
+
+NOTE :
+
+- mitigé par le `package-lock.json`
 
 ---
 
@@ -174,11 +198,21 @@ _( aka `sudo npm install ...` )_
 
 Les scripts sont exécutés avec les permissions de l'utilisateur courant.
 
+```json
+{
+	"scripts": {
+		"postinstall": "rm -rf /"
+	}
+}
+```
+
 ---
 
 ## Précaution 3
 
 Auditer TOUTES les dépendances du projet à la main (il suffit qu'un seul module soit impacté).
+
+--
 
 **Inconvénient :**
 
@@ -200,6 +234,8 @@ Depuis la version 6 :
 
 `npm audit`
 
+--
+
 **Inconvénient :**
 
 - potentiel délai avant qu'une faille soit déclarée
@@ -211,6 +247,8 @@ Depuis la version 6 :
 ## Précaution 5
 
 Dans le doute : `npm logout`
+
+<img src="https://media.giphy.com/media/HteV6g0QTNxp6/giphy-downsized-large.gif" />
 
 ---
 
@@ -226,6 +264,8 @@ Signature des modules ?
 
 ## Conclusion
 
+- "Les utilisateurs installent les packages les plus populaires" (ou pas)
+
 - une typo arrive vite (`npm install bable`)
 
 - Le problème n'est pas récent (2016) :
@@ -235,14 +275,6 @@ https://www.kb.cert.org/CERT_WEB/services/vul-notes.nsf/6eacfaeab94596f585256929
 - Le problème n'est pas trivial à résoudre
 
 - Les exploits sont assez fun à écrire :)
-
----
-
-class: center
-
-## Questions
-
-<img src="https://media.giphy.com/media/l3vQWH3WGT1xEWKwU/giphy.gif" />
 
 ---
 
@@ -256,4 +288,10 @@ _( React, NodeJS, PureScript, Haskell, ...)_
 
 <a href="https://www.fretlink.com/join-us">https://www.fretlink.com/join-us</a>
 
+---
 
+class: center
+
+## Des questions ?
+
+<img src="https://media.giphy.com/media/l3vQWH3WGT1xEWKwU/giphy.gif" />
