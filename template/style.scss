@@ -1,12 +1,12 @@
 // Theme
 // ---------------------------------------------------------------------------
 
-$primary          : #3F51B5;
-$secondary        : #009688;
+$primary          : #333;
+$secondary        : #666;
 $tertiary         : #757575;
 $light            : #FFF;
 $dark             : #333;
-$text-dark        : #212121; 
+$text-dark        : #212121;
 $text-light       : $light;
 $code-background  : #F8F8F8;
 $overlay          : transparentize(#000, .5);
@@ -47,6 +47,31 @@ blockquote {
   text-align: left;
   margin: 1em 0;
   & > p { margin: 0; }
+}
+
+.fretlink {
+	background: #0087d4;
+	color: #fafafa;
+
+	p {
+		color: #fafafa;
+	}
+
+	h1, h2, h3 {
+		color: #fafafa;
+		font-weight: lighter;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			margin-right: 1rem;
+		}
+	}
+
+	a {
+		color: white;
+	}
 }
 
 

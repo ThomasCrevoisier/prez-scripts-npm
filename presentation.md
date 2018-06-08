@@ -17,7 +17,9 @@ class: center
 
 # DISCLAIMER
 
-/!\ Je ne suis pas un expert en sécurité /!\
+**&#9888; Je ne suis pas un expert en sécurité &#9888;**
+
+<img src="https://media.giphy.com/media/KQm5O05y9rzQA/giphy.gif" />
 
 ---
 
@@ -27,7 +29,7 @@ class: center
 
 Dans tous les projets node :
 
-```
+```json
 {
   "name": "my-project",
   "version": "1.0.0",
@@ -41,7 +43,7 @@ Dans tous les projets node :
 
 ## Les scripts
 
-```
+```json
 {
   "name": "my-project",
   "scripts": {
@@ -53,7 +55,7 @@ Dans tous les projets node :
 
 Pour faire tourner un script :
 
-```
+```bash
 npm run say-hello
 ```
 
@@ -70,11 +72,14 @@ npm run say-hello
 
 ## "[pre|post]install"
 
-### Installation d'une dépendance npm :
+### Installation d'une dépendance npm `yolo` :
 
-- npm télécharge la dernière version de yolo
+- npm télécharge la dernière version de `yolo`
+
 - execute le script `preinstall` si il y en a un
+
 - installe les dépendances suivant toutes les étapes de cette liste
+
 - execute le script `install` ou `postinstall` si il y en a
 
 ---
@@ -111,7 +116,9 @@ class: center
 Le script de `postinstall` va :
 
 - exécuter un client socket vers un serveur qu'on contrôle
+
 - pour des messages spécifiques, le client executera la commande envoyée et remontera les résultats
+
 - c'est tout :)
 
 ---
@@ -154,9 +161,16 @@ Inconvénient :
 
 ## Précaution 2
 
-NE PAS FAIRE D'INSTALLATION EN ROOT, aka `sudo npm install ...`.
+&#9888; NE PAS FAIRE D'INSTALLATION EN ROOT &#9888;
 
-Pourquoi ?
+_( aka `sudo npm install ...` )_
+
+<br />
+<br />
+<br />
+
+--
+**Pourquoi ?**
 
 Les scripts sont exécutés avec les permissions de l'utilisateur courant.
 
@@ -166,12 +180,16 @@ Les scripts sont exécutés avec les permissions de l'utilisateur courant.
 
 Auditer TOUTES les dépendances du projet à la main (il suffit qu'un seul module soit impacté).
 
-Inconvénient :
+**Inconvénient :**
+
 - nombre de dépendances transitives conséquent
 
-Auditer toutes les dépendances du projet automatiquement ?
+_Auditer toutes les dépendances du projet automatiquement ?_
+
 - JavaScript est très permissif
+
 - analyse de code difficile
+
 - beaucoup de faux négatifs
 
 ---
@@ -182,8 +200,11 @@ Depuis la version 6 :
 
 `npm audit`
 
-Inconvénient :
+**Inconvénient :**
+
 - potentiel délai avant qu'une faille soit déclarée
+
+- délai encore plus long pour que ça se propage dans toutes vos dépendances
 
 ---
 
@@ -193,9 +214,13 @@ Dans le doute : `npm logout`
 
 ---
 
-- signature des modules ?
-  - https://github.com/npm/npm/issues/8489
-  - https://github.com/node-forward/discussions/issues/29
+## Autre piste potentielle
+
+Signature des modules ?
+
+- https://github.com/npm/npm/issues/8489
+
+- https://github.com/node-forward/discussions/issues/29
 
 ---
 
@@ -218,3 +243,17 @@ class: center
 ## Questions
 
 <img src="https://media.giphy.com/media/l3vQWH3WGT1xEWKwU/giphy.gif" />
+
+---
+
+class: center fretlink
+
+## <img src="img/fretlink.svg" /> recrute
+
+_( React, NodeJS, PureScript, Haskell, ...)_
+
+<img src="https://media.giphy.com/media/3d78lX84bkU6T4zNOg/giphy.gif" />
+
+<a href="https://www.fretlink.com/join-us">https://www.fretlink.com/join-us</a>
+
+
